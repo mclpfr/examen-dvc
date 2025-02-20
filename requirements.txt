@@ -1,0 +1,7 @@
+requests
+pandas
+numpy
+joblib
+pathlib
+scikit-learn
+dvc
