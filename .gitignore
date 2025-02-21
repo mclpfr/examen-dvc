@@ -1,3 +1,7 @@
 /venv
 /clean_data.csv
 /env
+metrics/.gitignore
+models/.gitignore
+src/data/__init__.py
+src/data/__pycache__/

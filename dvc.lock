@@ -3,11 +3,10 @@ stages:
   import_data:
     cmd: python src/data/import_raw_data.py
     deps:
-    - path: data/raw
+    - path: data/raw/raw.csv
       hash: md5
-      md5: 41dee78430cbebe25be9986bbb599d4a.dir
+      md5: 617b56af2992376d5c3e91ad80823898
       size: 333757
-      nfiles: 1
     - path: src/data/import_raw_data.py
       hash: md5
       md5: b73346300bcf28ed1ac1f8d4b8b7f69d
@@ -15,11 +14,10 @@ stages:
   split:
     cmd: python src/data/split_data.py
     deps:
-    - path: data/raw
+    - path: data/raw/raw.csv
       hash: md5
-      md5: 41dee78430cbebe25be9986bbb599d4a.dir
+      md5: 617b56af2992376d5c3e91ad80823898
       size: 333757
-      nfiles: 1
     - path: src/data/split_data.py
       hash: md5
       md5: 04fb9ad43c08e52e054b89ea7353707b
@@ -68,11 +66,14 @@ stages:
   grid:
     cmd: python src/models/grid_model.py
     deps:
-    - path: data/processed
+    - path: data/processed/X_train_scaled.csv
       hash: md5
-      md5: 5296afa19fd179aea4bb68689518f7d6.dir
-      size: 615372
-      nfiles: 6
+      md5: c1b80eb7f083888b625dd0369cf381f8
+      size: 227497
+    - path: data/processed/y_train.csv
+      hash: md5
+      md5: a9cd9d91da89f732843d72548f64ded3
+      size: 25951
     - path: src/models/grid_model.py
       hash: md5
       md5: 3d464b67c1ba5275d087792ea7706242
@@ -85,11 +86,10 @@ stages:
   train:
     cmd: python src/models/train_model.py
     deps:
-    - path: data/processed
+    - path: models/best_params.pkl
       hash: md5
-      md5: 5296afa19fd179aea4bb68689518f7d6.dir
-      size: 615372
-      nfiles: 6
+      md5: 9bf30beac238619a44e706260522efb2
+      size: 69
     - path: src/models/train_model.py
       hash: md5
       md5: ec7a9285420198b0aa129230ca65370a
@@ -102,16 +102,19 @@ stages:
   evaluate:
     cmd: python src/models/evaluate_model.py
     deps:
-    - path: data/processed
+    - path: models/trained_model.pkl
       hash: md5
-      md5: 5296afa19fd179aea4bb68689518f7d6.dir
-      size: 615372
-      nfiles: 6
+      md5: 88aaa6509a931eed65b793edf22ad945
+      size: 5326465
     - path: src/models/evaluate_model.py
       hash: md5
       md5: 5632feccdec80e1f072227b740811eb7
       size: 948
     outs:
+    - path: data/predictions.csv
+      hash: md5
+      md5: 725f4b004caceec7f9af6623e97ff665
+      size: 13205
     - path: metrics/scores.json
       hash: md5
       md5: bcece05531f000fc809973f71a2b702a
