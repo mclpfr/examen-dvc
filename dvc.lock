@@ -86,6 +86,14 @@ stages:
   train:
     cmd: python src/models/train_model.py
     deps:
+    - path: data/processed/X_train_scaled.csv
+      hash: md5
+      md5: c1b80eb7f083888b625dd0369cf381f8
+      size: 227497
+    - path: data/processed/y_train.csv
+      hash: md5
+      md5: a9cd9d91da89f732843d72548f64ded3
+      size: 25951
     - path: models/best_params.pkl
       hash: md5
       md5: 9bf30beac238619a44e706260522efb2
@@ -102,6 +110,14 @@ stages:
   evaluate:
     cmd: python src/models/evaluate_model.py
     deps:
+    - path: data/processed/X_test_scaled.csv
+      hash: md5
+      md5: 5e079189af6bd091d651a89fafb1c290
+      size: 57026
+    - path: data/processed/y_test.csv
+      hash: md5
+      md5: a051d29629c8bbb4cfb7e85c7f0315da
+      size: 6456
     - path: models/trained_model.pkl
       hash: md5
       md5: 88aaa6509a931eed65b793edf22ad945
